@@ -1,5 +1,6 @@
 package com.matt.android.topquiz;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // The user just clicked
+                Intent gameActivity = new Intent (MainActivity.this, GameActivity.class);
+                startActivity(gameActivity);
             }
         });
     }
