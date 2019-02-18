@@ -14,7 +14,7 @@ public class Question {
         this.setAnswerIndex(answerIndex);
     }
 
-    public List getQuestionList () {
+    public List getChoiceList () {
         return mChoiceList;
     }
 
