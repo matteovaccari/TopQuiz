@@ -2,8 +2,10 @@ package controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.matt.android.topquiz.R;
 
@@ -12,7 +14,7 @@ import java.util.Arrays;
 import model.Question;
 import model.QuestionBank;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mQuestion;
     private Button mButton1;
@@ -20,19 +22,66 @@ public class GameActivity extends AppCompatActivity {
     private Button mButton3;
     private Button mButton4;
     QuestionBank mQuestionBank;
+     Question mCurrentQuestion;
+     private int mNumberOfQuestions;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        mQuestionBank = this.generateQuestions();
+
+        //Branchement des widgets
         mQuestion = (TextView) findViewById(R.id.activity_game_question_text);
         mButton1 = (Button) findViewById(R.id.activity_game_answer1_btn);
         mButton2 = (Button) findViewById(R.id.activity_game_answer2_btn);
         mButton3 = (Button) findViewById(R.id.activity_game_answer3_btn);
-        mButton3 = (Button) findViewById(R.id.activity_game_answer4_btn);
+        mButton4 = (Button) findViewById(R.id.activity_game_answer4_btn);
 
-        mQuestionBank = this.generateQuestions();
+        //Utilisation de la propriété tag pour identifier les bouttons
+        mButton1.setTag(0);
+        mButton2.setTag(1);
+        mButton3.setTag(2);
+        mButton4.setTag(3);
+
+        mButton1.setOnClickListener(this);
+        mButton2.setOnClickListener(this);
+        mButton3.setOnClickListener(this);
+        mButton4.setOnClickListener(this);
+
+        mNumberOfQuestions = 12;
+
+        mCurrentQuestion =mQuestionBank.getQuestion();
+        this.displayQuestion(mCurrentQuestion);
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        int responseIndex = (int) v.getTag();
+
+        if (responseIndex == mCurrentQuestion.getAnswerIndex()) {
+            Toast.makeText(this,"Bonne réponse",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this,"Mauvaise Réponse !",Toast.LENGTH_LONG).show();
+        }
+        if (--mNumberOfQuestions == 0) {
+            //Plus de questions en banque, fin du jeu
+        } else {
+            mCurrentQuestion = mQuestionBank.getQuestion();  // Sinon je relance une question
+            displayQuestion(mCurrentQuestion);
+        }
+    }
+
+    private void displayQuestion (final Question question) {  //prend en paramètre une question
+        mQuestion.setText(question.getQuestion()); //met à jour l'interface graphique en rajoutant la question entrée en paramètre
+        mButton1.setText((CharSequence) question.getChoiceList().get(0)); // de même pour chaque réponse sur chaque boutton
+        mButton2.setText((CharSequence) question.getChoiceList().get(1));
+        mButton3.setText((CharSequence) question.getChoiceList().get(2));
+        mButton4.setText((CharSequence) question.getChoiceList().get(3));
     }
 
     private QuestionBank generateQuestions() {
@@ -60,8 +109,47 @@ public class GameActivity extends AppCompatActivity {
                 Arrays.asList("Saturne","Jupiter", "Uranus","Pluton"),0);
         Question question12 = new Question("Combien représente le montant de la fraude fiscale en 2018 ?",
                 Arrays.asList("15Mds €", "45Mds €", "70Mds €","100Mds €"), 3);
+        Question question13= new Question ("Quel pays est le 3ème plus gros vendeur d'armes au monde ?",
+                Arrays.asList("La Chine", "La France", "La Russie", "Les Etats-Unis"), 1);
+        Question question14 = new Question ("Quel Pays a vendu des armes à la Syrie entre 2005 et 2009 ?",
+                Arrays.asList("L'Arabie Saoudite","La Turquie", "La France","La Russie"),2);
 
-        return new QuestionBank(Arrays.asList(question1 /*,question2, */));
+        return new QuestionBank(Arrays.asList(question1,question2,question3,question4,
+                question5,question6,question7,question8,question9,question10,question11,question12, question13, question14));
 
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        System.out.println("GameActivity::onStart()");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        System.out.println("GameActivity::onResume()");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        System.out.println("GameActivity::onPause()");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        System.out.println("GameActivity::onStop()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        System.out.println("GameActivity::onDestroy()");
     }
 }
