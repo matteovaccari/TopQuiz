@@ -46,7 +46,20 @@ public class GameActivity extends AppCompatActivity {
                 Arrays.asList("Espagnol", "Anglais", "Portugais", "Uruguayien"), 0);
         Question question5 = new Question ("Quel est le pays oû le taux de bonheur était le plus élevé dans le monde en 2017?",
                 Arrays.asList("Danemark", "France", "Etats-Unis", "Japon"), 0);
-        Question question6 = new Question ()
+        Question question6 = new Question ("Quelle place occupe la France dans le classement des pays les plus heureux en 2018 ?",
+                Arrays.asList("5ème", "3ème", "9ème", "23ème"), 3);
+        Question question7 = new Question("Combien gagne BAYER pharmacologie chaque seconde qui passe ?",
+                Arrays.asList("1€", "6€", "15€", "44€"), 3);
+        Question question8 = new Question ("Combien d'animaux sont tués chaque seconde pour nourrir l'homme à travers le monde ?",
+                Arrays.asList("10", "70","300","2200"), 3);
+        Question question9 = new Question ("Quel nom porte le siège de la police londonienne ?",
+                Arrays.asList("Buckingham", "Scotland Yard", "Camden Town", "Notting Hill"), 1);
+        Question question10 = new Question ("Quel est l'autre nom de l'étude des fossiles:",
+                Arrays.asList("La Paléontologie", "La Geologie", "La Spéléologie","L'archéologie"), 0);
+        Question question11 = new Question ("Quelle planète du système solaire a une densité inférieure à l'eau ?",
+                Arrays.asList("Saturne","Jupiter", "Uranus","Pluton"),0);
+        Question question12 = new Question("Combien représente le montant de la fraude fiscale en 2018 ?",
+                Arrays.asList("15Mds €", "45Mds €", "70Mds €","100Mds €"), 3);
 
         return new QuestionBank(Arrays.asList(question1 /*,question2, */));
 
