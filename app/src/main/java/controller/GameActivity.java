@@ -38,6 +38,15 @@ public class GameActivity extends AppCompatActivity {
     private QuestionBank generateQuestions() {
         Question question1 = new Question("Quel est le plus gros animal vivant sur Terre ?",
                 Arrays.asList("L'éléphant", "Le Calamar Géant", "La baleine", "Le requin baleine"),2);
+        Question question2 = new Question("Quelle est la capitale de l'Australie ?",
+                Arrays.asList("Sydney", "Melbourne", "Canberra", "Nyah"),2);
+        Question question3 = new Question("Combien y'a-t-il d'étoiles sur le drapeau Américain ?",
+                Arrays.asList("49","50","51", "Ca dépend"), 1);
+        Question question4 = new Question("Quelle est la lanque principalement parlée en Uruguay ?",
+                Arrays.asList("Espagnol", "Anglais", "Portugais", "Uruguayien"), 0);
+        Question question5 = new Question ("Quel est le pays oû le taux de bonheur était le plus élevé dans le monde en 2017?",
+                Arrays.asList("Danemark", "France", "Etats-Unis", "Japon"), 0);
+        Question question6 = new Question ()
 
         return new QuestionBank(Arrays.asList(question1 /*,question2, */));
 
