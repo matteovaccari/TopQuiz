@@ -1,5 +1,7 @@
 package controller;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +26,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     QuestionBank mQuestionBank;
      Question mCurrentQuestion;
      private int mNumberOfQuestions;
+     private int mPlayerScore;
 
 
     @Override
@@ -32,6 +35,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_game);
 
         mQuestionBank = this.generateQuestions();
+
 
         //Branchement des widgets
         mQuestion = (TextView) findViewById(R.id.activity_game_question_text);
@@ -51,7 +55,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mButton3.setOnClickListener(this);
         mButton4.setOnClickListener(this);
 
-        mNumberOfQuestions = 12;
+        mNumberOfQuestions = 15;
 
         mCurrentQuestion =mQuestionBank.getQuestion();
         this.displayQuestion(mCurrentQuestion);
@@ -64,12 +68,26 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int responseIndex = (int) v.getTag();
 
         if (responseIndex == mCurrentQuestion.getAnswerIndex()) {
-            Toast.makeText(this,"Bonne réponse",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Bonne réponse",Toast.LENGTH_SHORT).show();
+            mPlayerScore++;
         } else {
-            Toast.makeText(this,"Mauvaise Réponse !",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Mauvaise Réponse !",Toast.LENGTH_SHORT).show();
         }
         if (--mNumberOfQuestions == 0) {
-            //Plus de questions en banque, fin du jeu
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                builder.setTitle("Fin du Jeu !")
+                        .setMessage("Votre score est de : " + mPlayerScore + "/15")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        })
+                        .create()
+                        .show();
+
+
         } else {
             mCurrentQuestion = mQuestionBank.getQuestion();  // Sinon je relance une question
             displayQuestion(mCurrentQuestion);
@@ -113,9 +131,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 Arrays.asList("La Chine", "La France", "La Russie", "Les Etats-Unis"), 1);
         Question question14 = new Question ("Quel Pays a vendu des armes à la Syrie entre 2005 et 2009 ?",
                 Arrays.asList("L'Arabie Saoudite","La Turquie", "La France","La Russie"),2);
+        Question question15 = new Question("Combien d'années faudrait-il travailler au Smic pour économiser le salaire de Jeff Bezos (Amazon) sur l'année 2018?",
+                Arrays.asList("100 ans", "500 ans", "1500 ans", "5 635 000 ans"),3);
 
         return new QuestionBank(Arrays.asList(question1,question2,question3,question4,
-                question5,question6,question7,question8,question9,question10,question11,question12, question13, question14));
+                question5,question6,question7,question8,question9,question10,question11,question12, question13, question14,question15));
 
     }
     @Override
