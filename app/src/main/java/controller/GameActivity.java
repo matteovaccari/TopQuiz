@@ -1,6 +1,7 @@
 package controller;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -70,6 +71,43 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if (responseIndex == mCurrentQuestion.getAnswerIndex()) {
             Toast.makeText(this,"Bonne réponse",Toast.LENGTH_SHORT).show();
             mPlayerScore++;
+    /*
+                switch(responseIndex) {   // Put greenBackGround if true
+                    case 0:
+                        mButton1.setBackgroundColor(Color.GREEN);
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case 1:
+                        mButton2.setBackgroundColor(Color.GREEN);
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case 2:
+                        mButton3.setBackgroundColor(Color.GREEN);
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case 3:
+                        mButton4.setBackgroundColor(Color.GREEN);
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                } */
+
+
         } else {
             Toast.makeText(this,"Mauvaise Réponse !",Toast.LENGTH_SHORT).show();
         }
@@ -89,6 +127,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
         } else {
+          /*  mButton1.setBackgroundColor(Color.parseColor("#FFFFFF")); // Button color reset (switch case have to work)
+            mButton2.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            mButton3.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            mButton4.setBackgroundColor(Color.parseColor("#FFFFFF")); */
             mCurrentQuestion = mQuestionBank.getQuestion();  // Sinon je relance une question
             displayQuestion(mCurrentQuestion);
         }
