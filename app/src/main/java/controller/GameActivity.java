@@ -138,38 +138,4 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 question5,question6,question7,question8,question9,question10,question11,question12, question13, question14,question15));
 
     }
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        System.out.println("GameActivity::onStart()");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        System.out.println("GameActivity::onResume()");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        System.out.println("GameActivity::onPause()");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        System.out.println("GameActivity::onStop()");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        System.out.println("GameActivity::onDestroy()");
-    }
 }
