@@ -1,7 +1,9 @@
 package controller;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
      Question mCurrentQuestion;
      private int mNumberOfQuestions;
      private int mPlayerScore;
+     public static final String intendID = "intendID";
 
 
 
@@ -149,9 +152,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this,"Mauvaise Réponse !",Toast.LENGTH_SHORT).show();
         }
         if (--mNumberOfQuestions == 0) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            Intent intent = new Intent();
+            intent.putExtra(intendID,mPlayerScore);
+            setResult(RESULT_OK,intent);
 
-                builder.setTitle("Fin du Jeu !")
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);  //Boite de dialogue de fin
+            builder.setTitle("Fin du Jeu !")
                         .setMessage("Votre score est de : " + mPlayerScore + "/15")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
