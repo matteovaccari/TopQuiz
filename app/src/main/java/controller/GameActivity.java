@@ -111,42 +111,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if (responseIndex == mCurrentQuestion.getAnswerIndex()) {
             Toast.makeText(this,"Bonne réponse",Toast.LENGTH_SHORT).show();
             mPlayerScore++;
-    /*
-                switch(responseIndex) {   // Put greenBackGround if true
-                    case 0:
-                        mButton1.setBackgroundColor(Color.GREEN);
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case 1:
-                        mButton2.setBackgroundColor(Color.GREEN);
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case 2:
-                        mButton3.setBackgroundColor(Color.GREEN);
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case 3:
-                        mButton4.setBackgroundColor(Color.GREEN);
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                } */
-
 
         } else {
             Toast.makeText(this,"Mauvaise Réponse !",Toast.LENGTH_SHORT).show();
@@ -155,25 +119,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent();
             intent.putExtra(intendID,mPlayerScore);
             setResult(RESULT_OK,intent);
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);  //Boite de dialogue de fin
-            builder.setTitle("Fin du Jeu !")
-                        .setMessage("Votre score est de : " + mPlayerScore + "/15")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                        })
-                        .create()
-                        .show();
-
+            showEndDialogBox();
 
         } else {
-          /*  mButton1.setBackgroundColor(Color.parseColor("#FFFFFF")); // Button color reset (switch case have to work)
-            mButton2.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            mButton3.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            mButton4.setBackgroundColor(Color.parseColor("#FFFFFF")); */
             mCurrentQuestion = mQuestionBank.getQuestion();  // Sinon je relance une question
             displayQuestion(mCurrentQuestion);
         }
@@ -185,6 +133,22 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mButton2.setText((CharSequence) question.getChoiceList().get(1));
         mButton3.setText((CharSequence) question.getChoiceList().get(2));
         mButton4.setText((CharSequence) question.getChoiceList().get(3));
+    }
+
+    public void showEndDialogBox() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);  //Boite de dialogue de fin
+        builder.setTitle("Fin du Jeu !")
+                .setMessage("Votre score est de : " + mPlayerScore + "/15")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .create()
+                .show();
+
+
     }
 
 }
