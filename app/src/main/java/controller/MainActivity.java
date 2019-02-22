@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
    private EditText mNameInput;
    private Button mPlayButton;
    private User mUser;
+    public static final int GAME_ACTIVITY_REQUEST_CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // The user just clicked
                 Intent gameActivity = new Intent (MainActivity.this, GameActivity.class);
-                startActivity(gameActivity);  // Quand on clique, switch d'activités.
+                startActivityForResult(gameActivity,GAME_ACTIVITY_REQUEST_CODE);  // Quand on clique, switch d'activités.
                 String firstname =mNameInput.getText().toString();
                 mUser.setFirstName(firstname);  // Set le name de l'user en fonction de ce qui est rentré par l'utilisateur
             }
