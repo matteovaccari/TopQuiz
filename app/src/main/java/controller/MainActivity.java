@@ -1,6 +1,7 @@
 package controller;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,13 +22,17 @@ public class MainActivity extends AppCompatActivity {
    private EditText mNameInput;
    private Button mPlayButton;
    private User mUser;
-    public static final int GAME_ACTIVITY_REQUEST_CODE = 2;
+   public static final int GAME_ACTIVITY_REQUEST_CODE = 2;
+   private SharedPreferences mPreferences;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (GAME_ACTIVITY_REQUEST_CODE == requestCode && RESULT_OK == resultCode) {
             //récup du score
             int score = data.getIntExtra(GameActivity.intendID,0);
+
+            mPreferences.edit().putInt("score",score).apply();
+            welcomeBack();
         }
     }
 
@@ -38,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mUser = new User();
+
+        mPreferences = getPreferences(MODE_PRIVATE);
 
         mGreetingText = (TextView) findViewById(R.id.activity_main_greeting_txt);   // Association des variables aux Vues graphiques
         mNameInput = (EditText) findViewById(R.id.activity_main_name_input);
@@ -66,12 +73,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // The user just clicked
+                String firstname =mNameInput.getText().toString();
+                mUser.setFirstName(firstname);
+
+                mPreferences.edit().putString("Firstname",mUser.getFirstName()).apply();
+
                 Intent gameActivity = new Intent (MainActivity.this, GameActivity.class);
                 startActivityForResult(gameActivity,GAME_ACTIVITY_REQUEST_CODE);  // Quand on clique, switch d'activités.
-                String firstname =mNameInput.getText().toString();
-                mUser.setFirstName(firstname);  // Set le name de l'user en fonction de ce qui est rentré par l'utilisateur
+
             }
         });
+
+
+    }
+
+    public void welcomeBack() {
+        String firstname = mPreferences.getString("Firstname", null);
+
+        if (null != firstname) {
+            int score = mPreferences.getInt("score", 0);
+
+            String fulltext = "Le dernier joueur était " + firstname
+                    + "!\nEt avait réalisé un score de " + score
+                    + "/15, peut-tu mieux faire ?";
+            mGreetingText.setText(fulltext);
+            mNameInput.setText(firstname);
+            mNameInput.setSelection(firstname.length());
+            mPlayButton.setEnabled(true);
+        }
     }
     @Override
     protected void onStart() {
