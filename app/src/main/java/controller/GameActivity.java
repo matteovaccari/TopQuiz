@@ -3,6 +3,7 @@ package controller;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -115,16 +116,23 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             Toast.makeText(this,"Mauvaise Réponse !",Toast.LENGTH_SHORT).show();
         }
-        if (--mNumberOfQuestions == 0) {
-            Intent intent = new Intent();
-            intent.putExtra(intendID,mPlayerScore);
-            setResult(RESULT_OK,intent);
-            showEndDialogBox();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (--mNumberOfQuestions == 0) {
+                    Intent intent = new Intent();
+                    intent.putExtra(intendID,mPlayerScore);
+                    setResult(RESULT_OK,intent);
+                    showEndDialogBox();
 
-        } else {
-            mCurrentQuestion = mQuestionBank.getQuestion();  // Sinon je relance une question
-            displayQuestion(mCurrentQuestion);
-        }
+                } else {
+                    mCurrentQuestion = mQuestionBank.getQuestion();  // Sinon je relance une question
+                    displayQuestion(mCurrentQuestion);
+                }
+            }
+        },2000);
+
+
     }
 
     private void displayQuestion (final Question question) {  //prend en paramètre une question
