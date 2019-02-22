@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,11 +29,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Button mButton3;
     private Button mButton4;
     QuestionBank mQuestionBank;
-     Question mCurrentQuestion;
-     private int mNumberOfQuestions;
-     private int mPlayerScore;
-     public static final String intendID = "intendID";
-
+    Question mCurrentQuestion;
+    private int mNumberOfQuestions;
+    private int mPlayerScore;
+    public static final String intendID = "intendID";
+    private boolean mEnableTouchEvents;
 
 
     @Override
@@ -41,7 +42,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_game);
 
         mQuestionBank = this.generateQuestions();
-
+        mEnableTouchEvents = true;
 
         //Branchement des widgets
         mQuestion = (TextView) findViewById(R.id.activity_game_question_text);
@@ -110,19 +111,22 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int responseIndex = (int) v.getTag();
 
         if (responseIndex == mCurrentQuestion.getAnswerIndex()) {
-            Toast.makeText(this,"Bonne réponse",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bonne réponse", Toast.LENGTH_SHORT).show();
             mPlayerScore++;
 
         } else {
-            Toast.makeText(this,"Mauvaise Réponse !",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Mauvaise Réponse !", Toast.LENGTH_SHORT).show();
         }
+
+        mEnableTouchEvents = false;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                mEnableTouchEvents = true;
                 if (--mNumberOfQuestions == 0) {
                     Intent intent = new Intent();
-                    intent.putExtra(intendID,mPlayerScore);
-                    setResult(RESULT_OK,intent);
+                    intent.putExtra(intendID, mPlayerScore);
+                    setResult(RESULT_OK, intent);
                     showEndDialogBox();
 
                 } else {
@@ -130,9 +134,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     displayQuestion(mCurrentQuestion);
                 }
             }
-        },2000);
+        }, 2000);
+    }
 
-
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return mEnableTouchEvents && super.dispatchTouchEvent(ev);
     }
 
     private void displayQuestion (final Question question) {  //prend en paramètre une question
