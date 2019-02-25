@@ -22,8 +22,10 @@ public class MainActivity extends AppCompatActivity {
    private EditText mNameInput;
    private Button mPlayButton;
    private User mUser;
+   private Button mLadderBord;
    public static final int GAME_ACTIVITY_REQUEST_CODE = 2;
    private SharedPreferences mPreferences;
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mGreetingText = (TextView) findViewById(R.id.activity_main_greeting_txt);   // Association des variables aux Vues graphiques
         mNameInput = (EditText) findViewById(R.id.activity_main_name_input);
         mPlayButton =(Button) findViewById(R.id.activity_main_play_btn);
+        mLadderBord =(Button) findViewById(R.id.activity_main_ladderbord);
 
         mPlayButton.setEnabled(false);  //Désactivation du bouton
 
@@ -103,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
             mPlayButton.setEnabled(true);
         }
     }
+
     @Override
     protected void onStart() {
         super.onStart();
