@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_1"
     tools:context="controller.LadderBordActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Top 5:"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textColor="#000000"
+        android:layout_gravity="center"
+        android:textSize="50sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/ladderbord_player1_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Joueur1"
+        android:layout_marginTop="25sp"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+    <TextView
+        android:id="@+id/ladderbord_player2_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Joueur2"
+        android:layout_marginTop="25sp"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+    <TextView
+        android:id="@+id/ladderbord_player3_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Joueur3"
+        android:layout_marginTop="25sp"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+    <TextView
+        android:id="@+id/ladderbord_player4_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Joueur4"
+        android:layout_marginTop="25sp"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+    <TextView
+        android:id="@+id/ladderbord_player5_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Joueur5"
+        android:layout_marginTop="25sp"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+
+</LinearLayout>
