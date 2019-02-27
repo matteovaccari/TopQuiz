@@ -11,10 +11,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.google.gson.Gson;
 
 import com.matt.android.topquiz.R;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import model.User;
+
+import static java.lang.System.out;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,29 +30,33 @@ public class MainActivity extends AppCompatActivity {
    private EditText mNameInput;
    private Button mPlayButton;
    private User mUser;
-   private Button mLadderBord;
+   private Button mLadderBordButton;
    public static final int GAME_ACTIVITY_REQUEST_CODE = 2;
+   public String KEY_PREFS = mUser.getFirstName();
    private SharedPreferences mPreferences;
+   private LadderBordActivity mLadderBordActivity;
+   private Map<String, Integer> playerList = new HashMap<>();
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (GAME_ACTIVITY_REQUEST_CODE == requestCode && RESULT_OK == resultCode) {
-            //récup du score
-            int score = data.getIntExtra(GameActivity.intendID,0);
 
-            mPreferences.edit().putInt("score",score).apply();
+            int score = data.getIntExtra(GameActivity.intendID,0); // Récup du score
+
+            mPreferences.edit().putInt("score",score).apply(); //Score sur l'écran principal
+
             welcomeBack();
         }
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        System.out.println("MainActivity::OnCreate()");
+        out.println("MainActivity::OnCreate()");
+
         mUser = new User();
 
         mPreferences = getPreferences(MODE_PRIVATE);
@@ -52,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         mGreetingText = (TextView) findViewById(R.id.activity_main_greeting_txt);   // Association des variables aux Vues graphiques
         mNameInput = (EditText) findViewById(R.id.activity_main_name_input);
         mPlayButton =(Button) findViewById(R.id.activity_main_play_btn);
-        mLadderBord =(Button) findViewById(R.id.activity_main_ladderbord);
+        mLadderBordButton =(Button) findViewById(R.id.activity_main_ladderbord);
 
         mPlayButton.setEnabled(false);  //Désactivation du bouton
 
@@ -88,7 +100,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        mLadderBordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ladderBordActivity = new Intent(MainActivity.this,LadderBordActivity.class);
+                startActivity(ladderBordActivity);
+            }
+        });
     }
 
     public void welcomeBack() {
@@ -111,34 +129,34 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        System.out.println("MainActivity::onStart()");
+        out.println("MainActivity::onStart()");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        System.out.println("MainActivity::onResume()");
+        out.println("MainActivity::onResume()");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
 
-        System.out.println("MainActivity::onPause()");
+        out.println("MainActivity::onPause()");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        System.out.println("MainActivity::onStop()");
+        out.println("MainActivity::onStop()");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        System.out.println("MainActivity::onDestroy()");
+        out.println("MainActivity::onDestroy()");
     }
 }
