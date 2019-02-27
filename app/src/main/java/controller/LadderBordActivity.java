@@ -26,8 +26,12 @@ public class LadderBordActivity extends AppCompatActivity {
     private TextView player3;
     private TextView player4;
     private TextView player5;
-    private List<TextView> playerList;
+    private String currentPlayerName;
+    private int currentPlayerScore;
+    private Map<String, Integer> playerList = new HashMap<>();
+    private List<TextView> playerListTextViews;
     private SharedPreferences mPreferences;
+
 
 
     @Override
@@ -41,9 +45,6 @@ public class LadderBordActivity extends AppCompatActivity {
         player4 = (TextView) findViewById(R.id.ladderbord_player4_id);
         player5 = (TextView) findViewById(R.id.ladderbord_player5_id);
 
-        for (int i = 0; i <= 4; i++) {
-            mPreferences.getString()
-        }
 
     }
 
