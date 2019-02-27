@@ -9,6 +9,7 @@
     tools:context="controller.LadderBordActivity">
 
     <TextView
+        android:id="@+id/ladderbord_list_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Top 5:"
@@ -19,44 +20,42 @@
         android:textSize="50sp"
         android:textStyle="bold"/>
     <TextView
-        android:id="@+id/ladderbord_player1_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Joueur1"
-        android:layout_marginTop="25sp"
+        android:id="@+id/activity_ranking_textview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:layout_margin="5dp"
+        android:textColor="@android:color/white"
+        android:background="@color/colorAccent"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textSize="30sp"/>
-    <TextView
-        android:id="@+id/ladderbord_player2_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Joueur2"
-        android:layout_marginTop="25sp"
+        android:gravity= "center"
+        android:layout_gravity= "center"
+        android:text="@string/ranking_list" />
+
+    <Button
+        android:id="@+id/activity_ranking_sort_by_score"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:textColor="@color/colorAccent"
+        android:background="@android:color/white"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:textSize="30sp"/>
-    <TextView
-        android:id="@+id/ladderbord_player3_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Joueur3"
-        android:layout_marginTop="25sp"
+        android:text="Trier par scores"/>
+
+    <Button
+        android:id="@+id/activity_ranking_sort_by_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:textColor="@color/colorAccent"
+        android:background="@android:color/white"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:textSize="30sp"/>
-    <TextView
-        android:id="@+id/ladderbord_player4_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Joueur4"
-        android:layout_marginTop="25sp"
-        android:textStyle="bold"
-        android:textSize="30sp"/>
-    <TextView
-        android:id="@+id/ladderbord_player5_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Joueur5"
-        android:layout_marginTop="25sp"
-        android:textStyle="bold"
-        android:textSize="30sp"/>
+        android:text="Trier par noms"/>
+
 
 </LinearLayout>

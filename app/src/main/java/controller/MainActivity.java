@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             mPreferences.edit().putInt("score",score).apply(); //Score sur l'écran principal
 
             // On prépare l'objet User à être inséré dans le classement
-            mUser.setmScore(score);
+            mUser.setScore(score);
             Character first = Character.toUpperCase(mUser.getFirstName().charAt(0)); //On met le username en Majuscule
             mUser.setFirstName(first + mUser.getFirstName().substring(1,mUser.getFirstName().length()));
 
@@ -139,13 +139,13 @@ public class MainActivity extends AppCompatActivity {
             }
             // Si la liste est vide on ajoute direct
             if (LadderBord.isEmpty()) {
-                LadderBord.add(new User(mUser.getFirstName(), mUser.getmScore()));
+                LadderBord.add(new User(mUser.getFirstName(), mUser.getScore()));
             }
 
             //Sinon si le score est >= au plus petit score de la liste (1er car la liste est triée)
             // On ajoute l'user à la liste
-            else if (score >= LadderBord.get(0).getmScore() || LadderBord.size() <= 6) {
-                LadderBord.add(new User(mUser.getFirstName(), mUser.getmScore()));
+            else if (score >= LadderBord.get(0).getScore() || LadderBord.size() <= 6) {
+                LadderBord.add(new User(mUser.getFirstName(), mUser.getScore()));
 
                 // Si la liste est égale à 6 on enlève le 1er score de la liste car la liste est triée
                 if (LadderBord.size() == 6) {
@@ -182,8 +182,8 @@ public class MainActivity extends AppCompatActivity {
         Collections.sort(LadderBord, new Comparator<User>() {
             @Override
             public int compare(User user1, User user2) {
-                if (user2.getmScore() != user1.getmScore()) {
-                    return user1.getmScore() - user2.getmScore();
+                if (user2.getScore() != user1.getScore()) {
+                    return user1.getScore() - user2.getScore();
                 }
                 else {
                     return user2.getFirstName().compareTo(user1.getFirstName());
