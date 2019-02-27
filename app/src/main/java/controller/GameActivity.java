@@ -33,7 +33,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private int mNumberOfQuestions;
     private int mPlayerScore;
     public static final String intendID = "intendID";
-   // private boolean mEnableTouchEvents;
+    private boolean mEnableTouchEvents;
     public static final String BUNDLE_SCORE = "current score";
     public static final String BUNDLE_CURRENT_QUESTION = "current question";
 
@@ -52,7 +52,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         mQuestionBank = this.generateQuestions();
-      //  mEnableTouchEvents = true;
+        mEnableTouchEvents = true;
 
         //Branchement des widgets
         mQuestion = (TextView) findViewById(R.id.activity_game_question_text);
@@ -133,11 +133,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "Mauvaise Réponse !", Toast.LENGTH_SHORT).show();
         }
 
-      //  mEnableTouchEvents = false;
+        mEnableTouchEvents = false;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-       //         mEnableTouchEvents = true;
+               mEnableTouchEvents = true;
                 if (--mNumberOfQuestions == 0) {
                     Intent intent = new Intent();
                     intent.putExtra(intendID, mPlayerScore);
@@ -151,11 +151,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
         }, 2000);
     }
-/*
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         return mEnableTouchEvents && super.dispatchTouchEvent(ev);
-    } */
+    } 
 
     private void displayQuestion (final Question question) {  //prend en paramètre une question
         mQuestion.setText(question.getQuestion()); //met à jour l'interface graphique en rajoutant la question entrée en paramètre
