@@ -34,6 +34,8 @@
         android:textColor="#000000"
         android:textStyle="bold"
         android:textSize="25sp"
+        android:maxLength="10"
+        android:maxLines="1"
         android:hint="Entrez votre prénom:" />
 
     <Button
