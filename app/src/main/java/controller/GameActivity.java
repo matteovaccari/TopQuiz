@@ -3,6 +3,7 @@ package controller;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -128,9 +129,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if (responseIndex == mCurrentQuestion.getAnswerIndex()) {
             Toast.makeText(this, "Bonne réponse", Toast.LENGTH_SHORT).show();
             mPlayerScore++;
+            MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.win_effect);
+            mp.start();
 
         } else {
             Toast.makeText(this, "Mauvaise Réponse !", Toast.LENGTH_SHORT).show();
+            MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.fail_effect);
+            mp.start();
         }
 
         mEnableTouchEvents = false;
@@ -155,7 +160,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         return mEnableTouchEvents && super.dispatchTouchEvent(ev);
-    } 
+    }
 
     private void displayQuestion (final Question question) {  //prend en paramètre une question
         mQuestion.setText(question.getQuestion()); //met à jour l'interface graphique en rajoutant la question entrée en paramètre
