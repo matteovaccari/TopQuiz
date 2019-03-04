@@ -1,5 +1,6 @@
 package controller;
 
+import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,7 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +32,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Button mButton2;
     private Button mButton3;
     private Button mButton4;
+    private ProgressBar mProgressBar;
     QuestionBank mQuestionBank;
     Question mCurrentQuestion;
     private int mNumberOfQuestions;
@@ -48,7 +52,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             mPlayerScore = savedInstanceState.getInt(BUNDLE_SCORE);
             mNumberOfQuestions = savedInstanceState.getInt(BUNDLE_CURRENT_QUESTION);
         } else {
-            mNumberOfQuestions = 15;
+            mNumberOfQuestions = 5;
             mPlayerScore =0;
         }
 
@@ -61,6 +65,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mButton2 = (Button) findViewById(R.id.activity_game_answer2_btn);
         mButton3 = (Button) findViewById(R.id.activity_game_answer3_btn);
         mButton4 = (Button) findViewById(R.id.activity_game_answer4_btn);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         //Utilisation de la propriété tag pour identifier les bouttons
         mButton1.setTag(0);
@@ -114,11 +119,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 Arrays.asList("La Chine", "La France", "La Russie", "Les Etats-Unis"), 1);
         Question question14 = new Question ("Quel Pays a vendu des armes à la Syrie entre 2005 et 2009 ?",
                 Arrays.asList("L'Arabie Saoudite","La Turquie", "La France","La Russie"),2);
-        Question question15 = new Question("Combien d'années faudrait-il travailler au Smic pour économiser le salaire de Jeff Bezos (Amazon) sur l'année 2018?",
-                Arrays.asList("100 ans", "500 ans", "1500 ans", "5 635 000 ans"),3);
 
         return new QuestionBank(Arrays.asList(question1,question2,question3,question4,
-                question5,question6,question7,question8,question9,question10,question11,question12, question13, question14,question15));
+                question5,question6,question7,question8,question9,question10,question11,question12, question13, question14));
 
     }
 
@@ -148,6 +151,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtra(intendID, mPlayerScore);
                     setResult(RESULT_OK, intent);
                     showEndDialogBox();
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
                 } else {
                     mCurrentQuestion = mQuestionBank.getQuestion();  // Sinon je relance une question
@@ -155,6 +163,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }, 2000);
+        ObjectAnimator animation = ObjectAnimator.ofInt(mProgressBar, "progress", 0, 500);
+        animation.setDuration(2000);
+        animation.setInterpolator(new DecelerateInterpolator());
+        animation.start();
     }
 
     @Override
@@ -173,7 +185,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void showEndDialogBox() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);  //Boite de dialogue de fin
         builder.setTitle("Fin du Jeu !")
-                .setMessage("Votre score est de : " + mPlayerScore + "/15")
+                .setMessage("Votre score est de : " + mPlayerScore + "/5")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
