@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
 
             String fulltext = "Le dernier joueur était " + firstname
                     + "!\nEt avait réalisé un score de " + score
-                    + "/15, peut-tu mieux faire ?";
+                    + "/5, peut-tu mieux faire ?";
             mGreetingText.setText(fulltext);
             mNameInput.setText(firstname);
             mNameInput.setSelection(firstname.length());
