@@ -58,6 +58,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             mNumberOfQuestions = 5;
             mPlayerScore =0;
         }
+        setTitle("Questions restantes: " + mNumberOfQuestions + "/5");
 
         mQuestionBank = this.generateQuestions();
         mEnableTouchEvents = true;
@@ -69,6 +70,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mButton3 = (Button) findViewById(R.id.activity_game_answer3_btn);
         mButton4 = (Button) findViewById(R.id.activity_game_answer4_btn);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+
 
         //Utilisation de la propriété tag pour identifier les bouttons
         mButton1.setTag(0);
@@ -163,6 +165,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     mCurrentQuestion = mQuestionBank.getQuestion();  // Sinon je relance une question
                     displayQuestion(mCurrentQuestion);
+                    setTitle("Questions restantes : " + mNumberOfQuestions + "/5");
                 }
             }
         }, 2000);
