@@ -1,6 +1,7 @@
 package controller;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +11,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -198,4 +201,23 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Ajout item à l'action bar
+        getMenuInflater().inflate(R.menu.action_bar_menu,menu);
+        return true;
+    }
+
+    //Fait l'action correspondante à l'item cliqué
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.refresh_button_id:
+                Toast.makeText(this,"Jeu relancé",Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(getIntent());
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
