@@ -1,10 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <item
         android:id="@+id/refresh_button_id"
-        android:icon="@drawable/refresh"
+        android:icon="@drawable/refresh_button"
         android:title="Refresh"
         app:showAsAction="always" />
 
